@@ -290,14 +290,19 @@ const bannerOffset =
 				}
 			}
 			
-			/* Mobile fallback: 2秒后自动显示 */
-			@media (max-width: 768px) {
-				body::before {
-					animation: mobile-bg-fallback 0.5s ease 2s forwards !important;
-				}
+		/* Mobile & Tablet fallback: 2秒后自动显示（扩大到 1024px 支持 iPad） */
+		@media (max-width: 1024px) {
+			body::before {
+				animation: mobile-bg-fallback 0.5s ease 2s forwards !important;
 			}
-			
-			@keyframes mobile-bg-fallback {
+		}
+		
+		/* 触摸屏设备通用 fallback（兼容所有 iPad 和平板） */
+		@media (hover: none) and (pointer: coarse) {
+			body::before {
+				animation: mobile-bg-fallback 0.5s ease 2s forwards !important;
+			}
+		}			@keyframes mobile-bg-fallback {
 				to {
 					opacity: var(--bg-opacity) !important;
 				}

@@ -59,6 +59,15 @@ pnpm type-check                 # TypeScript 类型检查
 pnpm new-post <filename>        # 创建新博客文章
 ```
 
+### SQLite 迁移（实验性）
+```bash
+# 预览数据库结构和映射
+pnpm node scripts/migrate-from-sqlite.mjs --db "path/to/database.db" --dry-run
+
+# 导出 Markdown 文章到 src/content/posts
+pnpm node scripts/migrate-from-sqlite.mjs --db "path/to/database.db" --out ./src/content/posts
+```
+
 ### IndexNow SEO
 ```bash
 pnpm build:indexnow            # 构建并提交到搜索引擎
