@@ -160,25 +160,45 @@ const bannerOffset =
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 
-			// Background image loading detection
+			// Background image loading detection with mobile support
 			const bgUrl = getComputedStyle(document.documentElement).getPropertyValue('--bg-url').trim();
 			const bgEnable = getComputedStyle(document.documentElement).getPropertyValue('--bg-enable').trim();
 			
+			console.log('[BG Debug] URL:', bgUrl, 'Enable:', bgEnable);
+			
 			if (bgUrl && bgUrl !== 'none' && bgEnable === '1') {
-				const img = new Image();
 				const urlMatch = bgUrl.match(/url\(["']?([^"')]+)["']?\)/);
+				console.log('[BG Debug] URL Match:', urlMatch);
+				
 				if (urlMatch) {
+					const imageUrl = urlMatch[1];
+					console.log('[BG Debug] Loading:', imageUrl);
+					
+					const img = new Image();
+					img.crossOrigin = 'anonymous';  // 尝试处理跨域问题
+					
 					img.onload = function() {
-						// 背景图片完全加载后，显示背景并启用卡片透明效果
+						console.log('[BG Debug] Image loaded successfully');
 						document.body.classList.add('bg-loaded');
 						document.documentElement.style.setProperty('--card-bg', 'var(--card-bg-transparent)');
 						document.documentElement.style.setProperty('--float-panel-bg', 'var(--float-panel-bg-transparent)');
 					};
-					img.onerror = function() {
-						// Keep cards opaque if background image fails to load
-						console.warn('Background image failed to load, keeping cards opaque');
+					
+					img.onerror = function(e) {
+						console.error('[BG Debug] Image load failed:', e);
+						// 即使失败也显示背景（可能是CORS问题但图片实际可用）
+						document.body.classList.add('bg-loaded');
 					};
-					img.src = urlMatch[1];
+					
+					img.src = imageUrl;
+					
+					// 超时保护：5秒后强制显示
+					setTimeout(function() {
+						if (!document.body.classList.contains('bg-loaded')) {
+							console.warn('[BG Debug] Timeout, forcing display');
+							document.body.classList.add('bg-loaded');
+						}
+					}, 5000);
 				}
 			}
 		</script>
@@ -237,10 +257,26 @@ const bannerOffset =
 				backface-visibility: hidden !important;
 				transform: translateZ(0) !important;
 				-webkit-transform: translateZ(0) !important;
+				/* Force hardware acceleration on iOS */
+				-webkit-perspective: 1000 !important;
+				perspective: 1000 !important;
 			}
 			
 			body.bg-loaded::before {
 				opacity: calc(var(--bg-opacity) * var(--bg-enable)) !important;
+			}
+			
+			/* Mobile fallback: show background immediately if not loaded within 2s */
+			@media (max-width: 768px) {
+				body::before {
+					animation: mobile-bg-fallback 0.5s ease 2s forwards !important;
+				}
+			}
+			
+			@keyframes mobile-bg-fallback {
+				to {
+					opacity: calc(var(--bg-opacity) * var(--bg-enable)) !important;
+				}
 			}
 		</style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
