@@ -99,7 +99,7 @@ export const navBarConfig: NavBarConfig = {
 		},
 		{
 			name: "统计",
-			url: "https://us.umami.is/share/Ly5RD4PNG2SJRx2i/www.micostar.tech", // External Umami share dashboard
+			url: "https://cloud.umami.is/share/Ly5RD4PNG2SJRx2i", // External Umami share dashboard
 			external: true, // Show an external link icon and will open in a new tab
 		},
 		{
@@ -143,7 +143,7 @@ export const imageFallbackConfig: ImageFallbackConfig = {
 
 export const umamiConfig: UmamiConfig = {
 	enable: true,
-	baseUrl: "https://us.umami.is",
+	baseUrl: "https://cloud.umami.is",
 	shareId: "Ly5RD4PNG2SJRx2i",
 	timezone: "Asia/Shanghai",
 };
