@@ -55,7 +55,19 @@ export default defineConfig({
             "fa6-solid": ["*"],
             "simple-icons": ["*"],
         },
-		}), svelte(), sitemap(),
+		}), svelte(), sitemap({
+			// 添加 sitemap 配置,确保格式正确
+			serialize(item) {
+				// 移除尾部斜杠(可选,根据您的 URL 结构)
+				// item.url = item.url.replace(/\/$/, '');
+				return item;
+			},
+			// 可以添加 changefreq 和 priority
+			changefreq: 'weekly',
+			priority: 0.7,
+			// 确保所有 URL 都是绝对路径
+			customPages: [],
+		}),
 	    expressiveCode({
 			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
 			plugins: [

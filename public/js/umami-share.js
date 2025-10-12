@@ -18,7 +18,7 @@
     }
     
     const shareUrl = `${baseUrl}/analytics/us/api/share/${shareId}`;
-    console.log('[Umami] 获取分享信息:', shareUrl);
+    //console.log('[Umami] 获取分享信息:', shareUrl);
     
     const res = await fetch(shareUrl);
     if (!res.ok) {
@@ -32,7 +32,7 @@
       throw new Error(`获取 Umami 分享信息失败: ${res.status} ${res.statusText}`);
     }
     const data = await res.json();
-    console.log('[Umami] 分享信息获取成功:', { websiteId: data.websiteId, tokenLength: data.token?.length });
+    //console.log('[Umami] 分享信息获取成功:', { websiteId: data.websiteId, tokenLength: data.token?.length });
     localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), value: data }));
     return data;
   }

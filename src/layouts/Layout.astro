@@ -168,22 +168,22 @@ const bannerOffset =
 			const ORIGINAL_DOMAIN = 'images.ai0728.com.cn';  // 主力图床
 			const FALLBACK_DOMAIN = 'image.cloudrunmax.top'; // R2备用图床
 			
-			console.log('[BG Debug] URL:', bgUrl, 'Enable:', bgEnable);
+			//console.log('[BG Debug] URL:', bgUrl, 'Enable:', bgEnable);
 			
 			if (bgUrl && bgUrl !== 'none' && bgEnable === '1') {
 				const urlMatch = bgUrl.match(/url\(["']?([^"')]+)["']?\)/);
-				console.log('[BG Debug] URL Match:', urlMatch);
+				//console.log('[BG Debug] URL Match:', urlMatch);
 				
 				if (urlMatch) {
 					let imageUrl = urlMatch[1];
 					let isUsingFallback = false;
-					console.log('[BG Debug] Loading:', imageUrl);
+					//console.log('[BG Debug] Loading:', imageUrl);
 					
 					const img = new Image();
 					img.crossOrigin = 'anonymous';  // 尝试处理跨域问题
 					
 					img.onload = function() {
-						console.log('[BG Debug] Image loaded successfully' + (isUsingFallback ? ' (using fallback)' : ''));
+						//console.log('[BG Debug] Image loaded successfully' + (isUsingFallback ? ' (using fallback)' : ''));
 						document.body.classList.add('bg-loaded');
 						document.documentElement.style.setProperty('--card-bg', 'var(--card-bg-transparent)');
 						document.documentElement.style.setProperty('--float-panel-bg', 'var(--float-panel-bg-transparent)');
@@ -196,7 +196,7 @@ const bannerOffset =
 						if (!isUsingFallback && imageUrl.includes(ORIGINAL_DOMAIN)) {
 							isUsingFallback = true;
 							const fallbackUrl = imageUrl.replace(ORIGINAL_DOMAIN, FALLBACK_DOMAIN);
-							console.warn('[BG Debug] Switching to fallback:', fallbackUrl);
+							console.warn('[BG Debug] Switching to fallback:');
 							
 							// 更新CSS变量为备用图床URL
 							document.documentElement.style.setProperty('--bg-url', `url(${fallbackUrl})`);
@@ -347,9 +347,6 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script> */}
-<!-- gad -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1683686345039700"
-     crossorigin="anonymous"></script>
 
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-C7LN161H2G"></script>
