@@ -1,7 +1,7 @@
 ---
 title: Rider与VisualStudio的中文注释编码的爱恨情仇（转换兼容）
 published: 2025-10-25T12:32:34
-description: '最近与团队合作开发Unity项目时发现Rider与VisualStudio在中文注释编码上存在不兼容问题，导致代码注释乱码。被老板说搞特殊，本文记录了解决该问题的过程与方法。'
+description: '最近与团队合作开发Unity项目时发现Rider与VisualStudio在中文注释编码上存在不兼容问题，导致代码注释乱码；本文记录了解决该问题的过程与方法。'
 image: '/uploads/images/rv4.png'
 tags: [Unity, Rider, VisualStudio, 中文注释, 编码转换]
 
