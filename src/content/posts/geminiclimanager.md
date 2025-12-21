@@ -1,7 +1,7 @@
 ---
 title: GeminiCLI账号切换插件，让你的开发之路不在繁琐！
 published: 2025-12-21T22:00:16
-description: '最近Unity项目开始庞大了，单一的网页交互式AI开发效率远不如编译器内AI，但是我都没拿到钱也不想使用CLuadeCode;诶,送了我n个学生Pro的Google大善人又发力了！'
+description: '最近Unity项目开始庞大了，单一的网页交互式AI开发效率远不如编译器内AI，但是我都没拿到钱也不想使用CluadeCode;诶,送了我n个学生Pro的Google大善人又发力了！'
 image: '/uploads/images/geminicli1.png'
 tags: [Gemini,GeminiCLI]
 
