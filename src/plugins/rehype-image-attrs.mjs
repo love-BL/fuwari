@@ -16,6 +16,9 @@ export default function rehypeImageAttrs() {
       if (!('decoding' in node.properties)) {
         node.properties.decoding = 'async';
       }
+      if (!('alt' in node.properties)) {
+        node.properties.alt = '';
+      }
       // Leave fetchpriority untouched to avoid hurting LCP images
     });
   };

@@ -16,6 +16,7 @@ import { imageFallbackConfig, siteConfig } from "./src/config.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import rehypeImageFallback from "./src/plugins/rehype-image-fallback.mjs";
+import rehypeImageAttrs from "./src/plugins/rehype-image-attrs.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
@@ -127,6 +128,7 @@ export default defineConfig({
             rehypeKatex,
             rehypeSlug,
             [rehypeImageFallback, imageFallbackConfig],
+            rehypeImageAttrs,
             [
                 rehypeComponents,
                 {
