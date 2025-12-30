@@ -139,6 +139,7 @@
     <input 
       class="play-btn" 
       type="checkbox"
+      aria-label="播放/暂停背景音乐"
       bind:this={checkboxElement}
       on:change={handleCheckboxChange}
       disabled={isLoading}

@@ -34,7 +34,7 @@ export default defineConfig({
     trailingSlash: "always",
     integrations: [tailwind({
         nesting: true,
-		}), swup({
+    }), swup({
         theme: false,
         animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
         // the default value `transition-` cause transition delay
@@ -47,72 +47,72 @@ export default defineConfig({
         updateHead: true,
         updateBodyClass: false,
         globalInstance: true,
-		}), icon({
+    }), icon({
         include: {
-            "preprocess: vitePreprocess(),": ["*"],
+            "material-symbols": ["*"],
             "fa6-brands": ["*"],
             "fa6-regular": ["*"],
             "fa6-solid": ["*"],
             "simple-icons": ["*"],
         },
-		}), svelte(), sitemap({
-			// 添加 sitemap 配置,确保格式正确
-			serialize(item) {
-				// 移除尾部斜杠(可选,根据您的 URL 结构)
-				// item.url = item.url.replace(/\/$/, '');
-				return item;
-			},
-			// 可以添加 changefreq 和 priority
-			changefreq: 'weekly',
-			priority: 0.7,
-			// 确保所有 URL 都是绝对路径
-			customPages: [],
-		}),
-	    expressiveCode({
-			themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
-			plugins: [
-				pluginCollapsibleSections(),
-				pluginLineNumbers(),
-				// pluginLanguageBadge(),
-				pluginCustomCopyButton()
-			],
-			defaultProps: {
-				wrap: true,
-				overridesByLang: {
-					'shellsession': {
-						showLineNumbers: false,
-					},
-				},
-			},
-			styleOverrides: {
-				codeBackground: "var(--codeblock-bg)",
-				borderRadius: "0.25rem",
-				borderColor: "none",
-				codeFontSize: "0.875rem",
-				codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-				codeLineHeight: "1.5rem",
-				frames: {
-					editorBackground: "var(--codeblock-bg)",
-					terminalBackground: "var(--codeblock-bg)",
-					terminalTitlebarBackground: "var(--codeblock-topbar-bg)",
-					editorTabBarBackground: "var(--codeblock-topbar-bg)",
-					editorActiveTabBackground: "none",
-					editorActiveTabIndicatorBottomColor: "var(--primary)",
-					editorActiveTabIndicatorTopColor: "none",
-					editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
-					terminalTitlebarBorderBottomColor: "none"
-				},
-				textMarkers: {
-					delHue: 0,
-					insHue: 180,
-					markHue: 250
-				}
-			},
-			frames: {
-				showCopyToClipboardButton: false,
-			}
-		}),
-	],
+    }), svelte(), sitemap({
+        // 添加 sitemap 配置,确保格式正确
+        serialize(item) {
+            // 移除尾部斜杠(可选,根据您的 URL 结构)
+            // item.url = item.url.replace(/\/$/, '');
+            return item;
+        },
+        // 可以添加 changefreq 和 priority
+        changefreq: 'weekly',
+        priority: 0.7,
+        // 确保所有 URL 都是绝对路径
+        customPages: [],
+    }),
+    expressiveCode({
+        themes: [expressiveCodeConfig.theme, expressiveCodeConfig.theme],
+        plugins: [
+            pluginCollapsibleSections(),
+            pluginLineNumbers(),
+            // pluginLanguageBadge(),
+            pluginCustomCopyButton()
+        ],
+        defaultProps: {
+            wrap: true,
+            overridesByLang: {
+                'shellsession': {
+                    showLineNumbers: false,
+                },
+            },
+        },
+        styleOverrides: {
+            codeBackground: "var(--codeblock-bg)",
+            borderRadius: "0.25rem",
+            borderColor: "none",
+            codeFontSize: "0.875rem",
+            codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+            codeLineHeight: "1.5rem",
+            frames: {
+                editorBackground: "var(--codeblock-bg)",
+                terminalBackground: "var(--codeblock-bg)",
+                terminalTitlebarBackground: "var(--codeblock-topbar-bg)",
+                editorTabBarBackground: "var(--codeblock-topbar-bg)",
+                editorActiveTabBackground: "none",
+                editorActiveTabIndicatorBottomColor: "var(--primary)",
+                editorActiveTabIndicatorTopColor: "none",
+                editorTabBarBorderBottomColor: "var(--codeblock-topbar-bg)",
+                terminalTitlebarBorderBottomColor: "none"
+            },
+            textMarkers: {
+                delHue: 0,
+                insHue: 180,
+                markHue: 250
+            }
+        },
+        frames: {
+            showCopyToClipboardButton: false,
+        }
+    }),
+    ],
     markdown: {
         remarkPlugins: [
             remarkMath,
@@ -140,12 +140,12 @@ export default defineConfig({
                     },
                 },
             ],
-			[
-				rehypeExternalLinks,
-				{
-				target: '_blank',
-				},
-			],
+            [
+                rehypeExternalLinks,
+                {
+                    target: '_blank',
+                },
+            ],
             [
                 rehypeAutolinkHeadings,
                 {

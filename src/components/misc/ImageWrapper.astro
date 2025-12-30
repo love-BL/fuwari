@@ -10,12 +10,15 @@ interface Props {
 	fit?: "cover" | "contain"; // how image should fit its container
     dim?: boolean; // whether to render the dim overlay layer
     isLCP?: boolean; // whether this is the Largest Contentful Paint image
+    fetchPriority?: "high" | "low" | "auto"; // fetch priority hint for the browser
 }
 import { Image } from "astro:assets";
 import { url } from "../../utils/url-utils";
 import { imageFallbackConfig, siteConfig } from "../../config";
 
-const { id, src, alt, position = "center", basePath = "/", fit = "cover", dim = true, isLCP = false } = Astro.props;
+const { id, src, alt, position = "center", basePath = "/", fit = "cover", dim = true, isLCP = false, fetchPriority } = Astro.props;
+// 当 isLCP 为 true 且未显式指定 fetchPriority 时，自动设为 "high"
+const effectiveFetchPriority = fetchPriority ?? (isLCP ? "high" : undefined);
 const className = Astro.props.class;
 
 const isLocal = !(
@@ -58,12 +61,12 @@ const imageStyle = `object-position: ${position}`;
     <!-- 图片内容 -->
     {dim && <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>}
     
-    {isLocal && img && <Image src={img} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} loading={isLCP ? "eager" : "lazy"} />}
+    {isLocal && img && <Image src={img} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} loading={isLCP ? "eager" : "lazy"} fetchpriority={effectiveFetchPriority} />}
     
     {!isLocal && (
         imageFallbackConfig.enable && src.includes(imageFallbackConfig.originalDomain) ? 
-            <img src={isPublic ? url(src) : src} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} onerror={`this.onerror=null; this.src='${(isPublic ? url(src) : src).replace(imageFallbackConfig.originalDomain, imageFallbackConfig.fallbackDomain)}';`} loading={isLCP ? "eager" : "lazy"} /> :
-            <img src={isPublic ? url(src) : src} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} loading={isLCP ? "eager" : "lazy"} />
+            <img src={isPublic ? url(src) : src} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} onerror={`this.onerror=null; this.src='${(isPublic ? url(src) : src).replace(imageFallbackConfig.originalDomain, imageFallbackConfig.fallbackDomain)}';`} loading={isLCP ? "eager" : "lazy"} fetchpriority={effectiveFetchPriority} /> :
+            <img src={isPublic ? url(src) : src} alt={alt || ""} class={`${imageClass} image-content ${!isLCP ? 'opacity-0 transition-opacity duration-500' : ''}`} style={imageStyle} onload={!isLCP ? "this.style.opacity='1'; this.parentElement.querySelector('.loading-bar').style.opacity='0';" : undefined} loading={isLCP ? "eager" : "lazy"} fetchpriority={effectiveFetchPriority} />
     )}
 </div>
 
