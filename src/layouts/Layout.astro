@@ -116,8 +116,8 @@ const bannerOffset =
 		<meta name="generator" content={Astro.generator} />
 		<script src="/js/umami-share.js" defer></script>
 		<!-- Preload background image -->
-		{siteConfig.background.src && (
-			<link rel="preload" as="image" href={siteConfig.background.src} />
+	{siteConfig.background.src && (
+			<link rel="preload" as="image" href={siteConfig.background.src} crossorigin="anonymous" />
 		)}
 		
 		{/* <!-- Content Security Policy -->
