@@ -101,7 +101,8 @@ const { remarkPluginFrontmatter } = await entry.render();
     {hasCover && <a href={url} aria-label={title}
                     class:list={["group/cover",
                         "max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0",
-                        "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95 transition-transform duration-300"
+                        "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95 transition-transform duration-300",
+                        "tilt-card" // Added for 3D tilt effect
                     ]} >
         <div class="absolute pointer-events-none z-10 w-full h-full group-hover/cover:bg-black/30 group-active/cover:bg-black/50 transition-colors duration-300"></div>
         <!-- 封面图上的箭头 -->
@@ -130,6 +131,43 @@ const { remarkPluginFrontmatter } = await entry.render();
 <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
 
 <script define:vars={{ entry, umamiConfig }}>
+    // 3D 悬浮视差效果
+    function initTiltEffect() {
+        const card = document.getElementById(`post-card-${entry.slug}`);
+        if (!card) return;
+
+        const tiltElement = card.querySelector('.tilt-card');
+        if (!tiltElement) return;
+
+        let frameId;
+        const handleMouseMove = (e) => {
+            if (frameId) cancelAnimationFrame(frameId);
+
+            frameId = requestAnimationFrame(() => {
+                const rect = tiltElement.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 计算相对中心点的坐标 (-1 到 1)
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -8; // 最大旋转角度 -8 到 8
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                tiltElement.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+        };
+
+        const handleMouseLeave = () => {
+             if (frameId) cancelAnimationFrame(frameId);
+             tiltElement.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        };
+
+        tiltElement.addEventListener('mousemove', handleMouseMove);
+        tiltElement.addEventListener('mouseleave', handleMouseLeave);
+    }
+
     // 获取文章浏览量统计
     function updateStatsUI(slug, pageViews, visits) {
         const viewsElement = document.getElementById(`page-views-${slug}`);
@@ -219,6 +257,9 @@ const { remarkPluginFrontmatter } = await entry.render();
         if (card) {
             observer.observe(card);
         }
+        
+        // 初始化 3D 效果
+        initTiltEffect();
     }
 
     if (document.readyState === 'loading') {

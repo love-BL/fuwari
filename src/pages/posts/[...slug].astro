@@ -275,6 +275,12 @@ const jsonLd = {
             <script is:inline src="https://fastly.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
             <script is:inline>
                 function initMermaid() {
+                    // 等待 Mermaid 加载完成
+                    if (typeof mermaid === 'undefined') {
+                        setTimeout(initMermaid, 50);
+                        return;
+                    }
+
                     // 使用 Expressive Code 生成的属性选择器
                     const mermaidBlocks = document.querySelectorAll('pre[data-language="mermaid"]');
                     if (mermaidBlocks.length === 0) return;
