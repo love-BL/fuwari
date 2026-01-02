@@ -105,28 +105,12 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		LinkPreset.About,
-		{ name: "应用", url: "/apps/", external: false },
-		{
-			name: "赞助",
-			url: "/donate/", // Internal links should not include the base path, as it is automatically added
-			external: false, // Show an external link icon and will open in a new tab
-		},
-		{
-			name: "统计",
-			url: "https://umami.micostar.cc/share/X9ZZZ5l2xErS44Rc", // External Umami share dashboard
-			external: true, // Show an external link icon and will open in a new tab
-		},
-		{
-			name: "状态",
-			url: "https://uptime.micostar.cc/status/default", // UptimeRobot status page
-			external: true, // Show an external link icon and will open in a new tab
-		},
-		{
-			name: "流量监控",
-			url: "https://eo.micostar.cc",
-			external: true,
-		},
+		LinkPreset.Friends,
+		LinkPreset.Apps,
+		LinkPreset.Donate,
+		LinkPreset.Stats,
+		LinkPreset.Status,
+		LinkPreset.Monitor,
 	],
 };
 

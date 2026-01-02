@@ -37,8 +37,19 @@ const assetsCollection = defineCollection({
 	}),
 });
 
+const friendsCollection = defineCollection({
+	type: 'data',
+	schema: z.object({
+		name: z.string(),
+		url: z.string(),
+		avatar: z.string(),
+		introduction: z.string(),
+	}),
+});
+
 export const collections = {
 	posts: postsCollection,
 	spec: specCollection,
 	assets: assetsCollection,
+	friends: friendsCollection,
 };
