@@ -169,11 +169,6 @@ const bannerOffset =
 			const bgUrl = getComputedStyle(document.documentElement).getPropertyValue('--bg-url').trim();
 			const bgEnable = getComputedStyle(document.documentElement).getPropertyValue('--bg-enable').trim();
 			
-			// 图片回退配置 (从 config.ts imageFallbackConfig 传入)
-			const ORIGINAL_DOMAIN = 'img.micostar.cc';  // 主力图床
-			const FALLBACK_DOMAIN = 'image.cloudrunmax.top'; // 备用图床 (支持参数注入)
-			
-			
 			//console.log('[BG Debug] URL:', bgUrl, 'Enable:', bgEnable);
 			
 			if (bgUrl && bgUrl !== 'none' && bgEnable === '1') {
@@ -182,47 +177,23 @@ const bannerOffset =
 				
 				if (urlMatch) {
 					let imageUrl = urlMatch[1];
-					let isUsingFallback = false;
 					//console.log('[BG Debug] Loading:', imageUrl);
 					
 					const img = new Image();
-					img.crossOrigin = 'anonymous';  // 尝试处理跨域问题
+					// 注意：移除 crossOrigin 属性，CSS 背景图不需要 CORS
+					// img.crossOrigin = 'anonymous'; // 暂时禁用，简化调试
 					
 					img.onload = function() {
-						//console.log('[BG Debug] Image loaded successfully' + (isUsingFallback ? ' (using fallback)' : ''));
+						//console.log('[BG Debug] Image loaded successfully');
 						document.body.classList.add('bg-loaded');
 						document.documentElement.style.setProperty('--card-bg', 'var(--card-bg-transparent)');
 						document.documentElement.style.setProperty('--float-panel-bg', 'var(--float-panel-bg-transparent)');
 					};
 					
 					img.onerror = function(e) {
-						console.error('[BG Debug] Image load failed:', e);
-						
-						// 🎯 增强版 Fallback 机制: 
-                        // 如果请求主力 API 失败, 切换到备用图床并自动追加必要参数
-						if (!isUsingFallback && imageUrl.includes(ORIGINAL_DOMAIN)) {
-							isUsingFallback = true;
-							
-                            // 构建备用地址，并确保追加旧版 API 所需参数
-                            let fallbackUrl = imageUrl.replace(ORIGINAL_DOMAIN, FALLBACK_DOMAIN);
-                            if (!fallbackUrl.includes('?')) {
-                                fallbackUrl += '?type=img&dir=package';
-                            } else if (!fallbackUrl.includes('dir=package')) {
-                                fallbackUrl += '&dir=package';
-                            }
-                            
-							console.warn('[BG Debug] Switching to double-fallback:', fallbackUrl);
-							
-							// 更新CSS变量为备用图床URL
-							document.documentElement.style.setProperty('--bg-url', `url(${fallbackUrl})`);
-							
-							// 重新加载图片
-							img.src = fallbackUrl;
-						} else {
-							// 已经是备用图床或不包含目标域名,直接显示
-							console.warn('[BG Debug] Fallback failed or not applicable, showing anyway');
-							document.body.classList.add('bg-loaded');
-						}
+						// 加载失败时直接显示背景（暂时禁用备用图床，等待 CORS 修复验证后再启用）
+						console.warn('[BG Debug] Image load failed, showing anyway:', e);
+						document.body.classList.add('bg-loaded');
 					};
 					
 					img.src = imageUrl;
