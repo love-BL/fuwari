@@ -11,7 +11,7 @@
 
 ```json
 {
-  "name": "流转星(Betsy)",
+  "name": "Betsy Blog",
   "avatar": "https://img.micostar.cc/images/avatar.webp",
   "introduction": "爱我所爱，我们是彼此永远的动力",
   "url": "https://www.micostar.cc"
