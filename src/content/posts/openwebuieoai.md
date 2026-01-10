@@ -1,7 +1,7 @@
 ﻿---
 title: 国内使用Gemini的官方模型
 published: 2025-10-08T17:37:02
-description: '通过EdgeOne的AI网关免魔法法使用Gemini的官方模型'
+description: '通过EdgeOne的AI网关在国内免魔法安全访问Gemini官方模型，配合OpenWebUI实现超快速度的AI对话体验，包含完整配置步骤和自开发Pipe插件。'
 image: '/images/eoopenwebuispeed.webp'
 tags: [EdgeOne, Gemini, OpenWebUI]
 

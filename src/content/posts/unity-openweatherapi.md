@@ -2,7 +2,7 @@
 title: Unity调用OpenWeatherAPI查询天气
 published: 2025-07-24T01:03:07.000Z
 updated: 2025-07-26T07:34:39.000Z
-description: 查询天气（实时）
+description: 'Unity调用OpenWeatherMap API实现实时天气查询功能，包含地理编码API、天气数据API的详细集成教程，带有完整的UI搭建和风向解析代码示例。'
 image: '/images/image-1753347365939-458403350.webp'
 tags: [Unity, 网络API]
 lang: ""

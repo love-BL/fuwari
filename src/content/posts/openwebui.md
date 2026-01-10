@@ -2,7 +2,7 @@
 title: 关于OpenWebUI外部访问的细节错误
 published: 2025-08-02T07:30:35.000Z
 updated: 2025-08-02T07:33:55.000Z
-description: OpenWebUI使用nginx来供外部访问的细节错误
+description: '解决OpenWebUI外部访问时Nginx配置的常见错误，包括WebSocket支持问题的完整排查方案，涵盖Nginx配置和域名服务商（EdgeOne/Cloudflare）设置。'
 image: '/images/openwebui.webp'
 tags: [AI, OpenWebUI, Nginx]
 lang: ""

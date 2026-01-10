@@ -2,7 +2,7 @@
 title: Unity配置MCP实现自动化
 published: 2025-08-12T08:45:29.000Z
 updated: 2025-08-12T09:08:12.000Z
-description: 配置UnityMCP实现AI接管你的Unity
+description: '配置Unity MCP实现AI接管Unity开发自动化，包含VSCode、Rider、Visual Studio三种IDE的完整MCP配置示例，支持Github Copilot集成。'
 image: '/images/unitymcp.webp'
 tags: [AI, MCP, Unity, 自动化]
 lang: ""

@@ -2,7 +2,7 @@
 title: "Gemini-balance部署指南(非docker)"
 published: 2025-08-10T06:55:17.000Z
 updated: 2025-08-10T07:41:23.000Z
-description: git源仓库形式启动项目
+description: 'Gemini Balance非Docker部署完整指南，通过git源仓库形式启动项目，实现Gemini API的负载均衡和中转服务，附带网页版和Notion笔记教程。'
 image: '/images/geminibalance.webp'
 tags: [服务器, 中转, Gemini, 部署教程]
 lang: ""
