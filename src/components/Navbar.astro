@@ -56,7 +56,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
             <!-- Right Controls: Music, Search, Settings, Menu -->
             <div class="flex items-center gap-1">
                 <!-- 音乐播放器：桌面端显示在导航栏，移动端在汉堡菜单中 -->
-                <div class="hidden md:block scale-90 origin-right">
+                <div class="hidden md:block origin-right" style="transform: none;">
                     <MusicPlayer client:only="svelte"></MusicPlayer>
                 </div>
                 

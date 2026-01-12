@@ -322,20 +322,23 @@
   /* 优雅的音乐加载提示样式 */
   .music-loading-notification {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    top: 12px;
+    right: 12px;
+    bottom: auto;
+    left: auto;
     background: var(--card-bg);
     color: var(--primary);
     padding: 0;
     border-radius: var(--radius-large);
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    z-index: 10000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     border: 1px solid var(--btn-regular-bg);
     overflow: hidden;
-    animation: musicNotificationSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: musicNotificationSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     min-width: 280px;
+    max-width: 320px;
   }
 
   .loading-content {
@@ -486,13 +489,13 @@
     animation: successGlow 0.8s ease-out;
   }
 
-  @keyframes musicNotificationSlideIn {
+  @keyframes musicNotificationSlideUp {
     from {
-      transform: translateX(100%) scale(0.9);
+      transform: translateY(100%) scale(0.9);
       opacity: 0;
     }
     to {
-      transform: translateX(0) scale(1);
+      transform: translateY(0) scale(1);
       opacity: 1;
     }
   }
@@ -594,28 +597,46 @@
       height: 11px;
     }
 
+    /* 移动端：通知贴在汉堡菜单整体下方 */
     .music-loading-notification {
-      top: 16px;
+      position: fixed;
+      top: auto;
+      bottom: 16px;
+      left: auto;
       right: 16px;
-      min-width: 260px;
+      min-width: 240px;
+      max-width: 280px;
+      width: auto;
+      margin: 0;
+      z-index: 10000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
     }
 
     .loading-content {
-      padding: 14px 16px 10px 16px;
-      gap: 12px;
+      padding: 12px 14px 10px 14px;
+      gap: 10px;
     }
 
     .music-icon {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .music-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .loading-wave {
+      display: none;
     }
 
     .main-text {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .sub-text {
-      font-size: 11px;
+      font-size: 10px;
     }
   }
 </style>
